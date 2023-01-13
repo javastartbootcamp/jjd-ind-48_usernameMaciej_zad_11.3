@@ -37,25 +37,23 @@ public class Procesor extends Component implements Overclockable {
 
     public void setMaxTemperature(double maxTemperature) {
         if (maxTemperature > 100) {
-            throw new IllegalArgumentException("Maksymalna temperatura procesora nie może wynosić więcej niż 100stopni" +
-                    ", ponieważ może się spalić");
+            throw new IllegalArgumentException("Maksymalna temperatura procesora nie może wynosić więcej niż 100stopni" + ", ponieważ może się spalić");
         }
         this.maxTemperature = maxTemperature;
     }
 
     @Override
     public void overclock() {
-        speed += 100;
-        temperature += 10;
-        if (temperature >= maxTemperature) {
+        double checkIfCanOverclock = temperature + 10;
+        if (checkIfCanOverclock >= maxTemperature) {
             throw new TooHighTemperatureException();
         }
+        speed += 100;
+        temperature += 10;
     }
 
     @Override
     public String toString() {
-        return "model:" + getModel() + ", producer:" + getProducer() + ", serialNumber:" + getSerialNumber() +
-                ", temperature:" + temperature + "°C, maxTemperature:" + maxTemperature +
-                "°C, speed:" + speed + "MHz\n";
+        return "model:" + getModel() + ", producer:" + getProducer() + ", serialNumber:" + getSerialNumber() + ", temperature:" + temperature + "°C, maxTemperature:" + maxTemperature + "°C, speed:" + speed + "MHz\n";
     }
 }

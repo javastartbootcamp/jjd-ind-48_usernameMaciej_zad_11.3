@@ -56,11 +56,12 @@ public class Memory extends Component implements Overclockable {
 
     @Override
     public void overclock() {
-        speed += 100;
-        temperature += 15;
-        if (temperature >= maxTemperature) {
+        double checkIfCanOverclock = temperature + 15;
+        if (checkIfCanOverclock >= maxTemperature) {
             throw new TooHighTemperatureException();
         }
+        speed += 100;
+        temperature += 15;
     }
 
     @Override
